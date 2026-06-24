@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Haal de code op
+      - name: Get code
         uses: actions/checkout@v3
 
-      - name: Installeer Python
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Installeer benodigdheden
+      - name: Install dep
         run: pip install requests
 
-      - name: Voer de scraper uit
+      - name: Execute
         env:
           RIJEXAMEN_USER: ${{ secrets.RIJEXAMEN_USER }}
           RIJEXAMEN_PASS: ${{ secrets.RIJEXAMEN_PASS }}
