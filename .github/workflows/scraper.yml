@@ -1,9 +1,6 @@
 name: Rijexamen Scraper
 
 on:
-  schedule:
-    # Draait elke 10 minuten
-    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 jobs:
