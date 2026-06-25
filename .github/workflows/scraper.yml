@@ -23,9 +23,10 @@ jobs:
 
       - name: Run Scraper
         env:
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          # Deze namen links moeten EXACT matchen met de os.environ.get() in je Python-code
+          RIJEXAMEN_USER: ${{ secrets.RIJEXAMEN_USER }}
+          RIJEXAMEN_PASS: ${{ secrets.RIJEXAMEN_PASS }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           CENTER_ID: ${{ secrets.CENTER_ID }}
           SERVICE_ID: ${{ secrets.SERVICE_ID }}
           CANDIDATE_ID: ${{ secrets.CANDIDATE_ID }}
