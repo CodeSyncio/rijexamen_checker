@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 import time
 
-TARGET_DATE_LIMIT = "2026-09-15"
+TARGET_DATE_LIMIT = "2026-09-01"
 
 USERNAME = os.environ.get("RIJEXAMEN_USER")
 PASSWORD = os.environ.get("RIJEXAMEN_PASS")
