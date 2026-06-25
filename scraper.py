@@ -3,6 +3,8 @@ import requests
 from datetime import datetime
 import time
 
+TARGET_DATE_LIMIT = "2026-09-15"
+
 USERNAME = os.environ.get("RIJEXAMEN_USER")
 PASSWORD = os.environ.get("RIJEXAMEN_PASS")
 WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
@@ -43,8 +45,8 @@ def get_token():
 
 def main():
     now = datetime.now()
-    if now.hour == 12 and now.minute < 15:
-        notify("INFO: scraper is running.")
+    if now.hour == 12 and now.minute < 5:
+        notify(f"INFO: Scraper is active. Filtering slots before {TARGET_DATE_LIMIT}")
 
     token = get_token()
     if not token: 
@@ -93,9 +95,28 @@ def main():
         else:
             break
 
-    if slots_found:
-        first = slots_found[0].get('startTime')
-        notify(f"@everyone SUCCES: {len(slots_found)} slots found. First: {first}\nhttps://rijexamen.km.be")
+    early_slots = []
+    max_date_obj = datetime.strptime(TARGET_DATE_LIMIT, "%Y-%m-%d")
+
+    for slot in slots_found:
+        start_time = slot.get('startTime')
+        if start_time:
+            date_obj = datetime.strptime(start_time[:10], "%Y-%m-%d")
+            if date_obj < max_date_obj:
+                early_slots.append(slot)
+
+    if early_slots:
+        early_slots.sort(key=lambda x: x.get('startTime', ''))
+        earliest_slot = early_slots[0].get('startTime')
+        
+        msg = (
+            f"🚨 **@everyone SLOT FOUND!** 🚨\n"
+            f"Found **{len(early_slots)}** public slot(s) before {TARGET_DATE_LIMIT}!\n"
+            f"Earliest available: **{earliest_slot}**\n"
+            f"Book now: https://rijexamen.km.be"
+        )
+        
+        notify(msg)
 
 if __name__ == "__main__":
     try:
