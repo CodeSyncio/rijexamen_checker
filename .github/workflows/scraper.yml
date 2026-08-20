@@ -30,4 +30,7 @@ jobs:
           CENTER_ID: ${{ secrets.CENTER_ID }}
           SERVICE_ID: ${{ secrets.SERVICE_ID }}
           CANDIDATE_ID: ${{ secrets.CANDIDATE_ID }}
+          TARGET_DATE_LIMIT: ${{ secrets.TARGET_DATE_LIMIT }}
+          TEST_WEBHOOK: ${{ secrets.TEST_WEBHOOK }}
+
         run: python scraper.py
