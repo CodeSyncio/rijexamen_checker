@@ -4,8 +4,6 @@ import time
 import requests
 from datetime import datetime, timezone
 
-load_dotenv()
-
 # Environment Variables
 USERNAME = os.environ.get("RIJEXAMEN_USER")
 PASSWORD = os.environ.get("RIJEXAMEN_PASS")
