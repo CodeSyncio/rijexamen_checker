@@ -3,6 +3,9 @@ import sys
 import time
 import requests
 from datetime import datetime, timezone
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Environment Variables
 USERNAME = os.environ.get("RIJEXAMEN_USER")
@@ -130,7 +133,8 @@ def main():
         print("⚠️ [DEBUG_MODE_ACTIVE] Full HTTP dumps enabled.")
 
     now = datetime.now()
-    if now.hour == 12 and now.minute < 5:
+    # AANGEPAST: Trigger de heartbeat elk uur rond XX:00 t/m XX:04
+    if now.minute < 5:
         send_discord_embed(
             title="`[KM_SYS_INFO-HEARTBEAT]` Scraper actief (Heartbeat)",
             description=f"Script draait nog.\nZoekt voor cut-off: `{TARGET_DATE_LIMIT}`",
