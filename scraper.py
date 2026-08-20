@@ -3,9 +3,7 @@ import sys
 import time
 import requests
 from datetime import datetime, timezone
-from dotenv import load_dotenv
 
-load_dotenv()
 
 # Environment Variables
 USERNAME = os.environ.get("RIJEXAMEN_USER")
