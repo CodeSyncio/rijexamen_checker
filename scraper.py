@@ -132,7 +132,7 @@ def main():
 
     now = datetime.now()
     # AANGEPAST: Trigger de heartbeat elk uur rond XX:00 t/m XX:04
-    if now.minute < 5:
+    if (now.hour in [8, 12]) and now.minute < 5:
         send_discord_embed(
             title="`[KM_SYS_INFO-HEARTBEAT]` Scraper actief (Heartbeat)",
             description=f"Script draait nog.\nZoekt voor cut-off: `{TARGET_DATE_LIMIT}`",
